@@ -4,7 +4,7 @@
 - Duration: 40 - 45 minutes plus questions
 - Where: BSU Unit, [Forvie site](http://www.mrc-bsu.cam.ac.uk/about-bsu/how-to-find-us/)
 
-Mass spectrometry-based proteomics: challenges and opportunities
+### Mass spectrometry-based proteomics: challenges and opportunities
 
 Mass spectrometry is the technique of choice to study proteins in a
 high throughput fashion. And while the final outputs that you might be
