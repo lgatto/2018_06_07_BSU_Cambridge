@@ -2,7 +2,7 @@
 
 - When: 7 June 2018 at 2.30pm
 - Duration: 40 - 45 minutes plus questions
-- Where: BSU Unit, [Forvie site](http://www.mrc-bsu.cam.ac.uk/about-bsu/how-to-find-us/)
+- Where: BSU Unit, [Forvie site](https://www.mrc-bsu.cam.ac.uk/contact-us/how-to-find-us/)
 
 ### Mass spectrometry-based proteomics: challenges and opportunities
 
