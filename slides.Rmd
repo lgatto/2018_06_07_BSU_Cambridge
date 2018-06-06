@@ -6,8 +6,6 @@ output:
   xaringan::moon_reader:
    css: ["default", "default-fonts", "my.css"]
    nature:
-    highlightStyle: github
-    highlightLines: true
     countIncrementalSlides: false
 ---
 class: middle
@@ -446,12 +444,12 @@ Acquisition - DDA).
 
 Examples:
 
-- **MS$^{E}$**, where the whole M/Z range is fragmented (at different
+- $MS^{E}$, where the whole M/Z range is fragmented (at different
   energies) and precursors and fragment ions are matched using their
   elution patterns, by Waters.
-- **SWATH-MS** (Sequential Windowed Acquisition of All Theoretical
+- SWATH-MS (Sequential Windowed Acquisition of All Theoretical
   Fragment Ion Mass Spectra) by AB Sciex
-- **AIF** (All-ion fragmentation, similar to MS$^E$) by Thermo Fisher.
+- AIF (All-ion fragmentation, similar to $MS^E$) by Thermo Fisher.
 - ...
 
 The advantage of these is that all data are recorded and has thus the

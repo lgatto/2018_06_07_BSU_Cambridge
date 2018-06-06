@@ -454,12 +454,12 @@ Acquisition - DDA).
 
 Examples:
 
-- **MS$^{E}$**, where the whole M/Z range is fragmented (at different
+- `\(MS^{E}\)`, where the whole M/Z range is fragmented (at different
   energies) and precursors and fragment ions are matched using their
   elution patterns, by Waters.
-- **SWATH-MS** (Sequential Windowed Acquisition of All Theoretical
+- SWATH-MS (Sequential Windowed Acquisition of All Theoretical
   Fragment Ion Mass Spectra) by AB Sciex
-- **AIF** (All-ion fragmentation, similar to MS$^E$) by Thermo Fisher.
+- AIF (All-ion fragmentation, similar to `\(MS^E\)`) by Thermo Fisher.
 - ...
 
 The advantage of these is that all data are recorded and has thus the
@@ -566,8 +566,6 @@ Rainer](https://github.com/jotsetung/).
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
-"highlightLines": true,
 "countIncrementalSlides": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
@@ -580,12 +578,23 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   d.head.appendChild(s);
 })();</script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
   }
-});
+})();
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
