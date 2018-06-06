@@ -1,0 +1,556 @@
+---
+title: "Mass spectrometry-based proteomics: challenges and opportunities"
+author: "[Laurent Gatto](#laurent-gatto)"
+date: "7 June 2018, [MRC Biostatistics Unit](https://www.mrc-bsu.cam.ac.uk/)"
+output:
+  xaringan::moon_reader:
+   css: ["default", "default-fonts", "my.css"]
+   nature:
+    highlightStyle: github
+    highlightLines: true
+    countIncrementalSlides: false
+---
+class: middle
+name: cc-by
+
+### Get the slides at http://bit.ly/20180607bsu
+
+These slides are available under a **creative common
+[CC-BY license](http://creativecommons.org/licenses/by/4.0/)**. You are
+free to share (copy and redistribute the material in any medium or
+format) and adapt (remix, transform, and build upon the material) for
+any purpose, even commercially
+<img height="20px" alt="CC-BY" src="./img/cc1.jpg" />.
+
+---
+class: middle
+
+### Abstract
+
+Mass spectrometry is the technique of choice to study proteins in a
+high throughput fashion. And while the final outputs that you might be
+presented looks like a typical omics table, with assayed proteins
+along the row and samples along the columns, the characteristics of
+mass spectrometry result in some interesting features. In my talk, I
+will describe how mass spectrometry is used to identify and quantify
+proteins and highlight some important features of the acquisition
+process. I will then present some recent applications of mass
+spectrometry-based proteomics and conclude with challenges and
+opportunities.
+
+---
+class: middle center
+
+![](./Figures/overview0.png)
+
+???
+
+Take-home message: *In what ways to these summaries differ?*
+
+Using a common gene-centric identifier, but
+
+- What do we have along the rows, what are our features? Transcripts
+  on the left. Protein groups on the right.
+- How are these intensities produced?
+
+
+---
+class: middle
+
+### Overview
+
+![](./Figures/overview1.jpg)
+
+---
+class: middle
+### Overview
+
+![](./Figures/overview2.jpg)
+
+---
+### How does MS work?
+
+1. Digestion of proteins into peptides - as will become clear later,
+   the features we measure in 'proteomics' are peptides, **not**
+   proteins.
+
+--
+
+2. On-line liquid chromatography (LC-MS)
+
+--
+
+3. Mass spectrometry (MS) is a technology that **separates** charged
+   molecules (ions, peptides) based on their mass to charge ratio
+   (M/Z).
+
+---
+### Chromatography
+
+MS is generally coupled to chromatography (liquid LC, but can also be
+gas-based GC). The time an analytes takes to elute from the
+chromatography column is the **retention time**.
+
+![A chromatogram, illustrating the total amount of analytes over the retention time.](./Figures/chromatogram.png)
+
+???
+
+- This is an acquisition. There can be one per sample (with muliple
+  fractions), of samples can be combined/multiplexed and acquired
+  together.
+
+---
+class: middle
+
+An mass spectrometer is composed of three components:
+
+1. The *source*, that ionises the molecules: examples are Matrix-assisted
+   laser desorption/ionisation (MALDI) or electrospray ionisation.
+   (ESI)
+2. The *analyser*, that separates the ions: Time of flight (TOF) or Orbitrap.
+3. The *detector* that quantifies the ions.
+
+Ions typically go through that cylce at least twice (MS2, tandem MS,
+or MSMS). Before the second cycle, individual *precursor* ions a
+selected and broken into *fragment* ions.
+
+---
+class: middle center
+
+![Schematics of a mass spectrometer and two rounds of MS.](./Figures/SchematicMS2.png)
+
+???
+
+Before MS:
+- Restriction with enzyme, typically trypsine.
+- Off-line fractionation.
+
+An mass spectrometer is composed of three components:
+
+1. The *source*, that ionises the molecules: examples are Matrix-assisted
+   laser desorption/ionisation (MALDI) or electrospray ionisation.
+   (ESI)
+2. The *analyser*, that separates the ions: Time of flight (TOF) or Orbitrap.
+3. The *detector* that quantifies the ions.
+
+Ions typically go through that cylce at least twice (MS2, tandem MS or
+MSMS). Before the second cycle, individual *precursor* ions a
+selected, broken into fragment ions.
+
+---
+class: middle center
+
+![Separation and detection of ions in a mass spectrometer.](./Figures/mstut.gif)
+
+---
+class: middle center
+
+![Parent ions in the MS1 spectrum (left) and two sected fragment ions MS2 spectra (right).](./Figures/MS1-MS2-spectra.png)
+
+???
+
+Highlight
+- Semi-stochastic nature of MS
+- Data dependent acquisition (DDA)
+
+---
+class: middle center
+
+.left-col-50[
+![MS1 spectra over retention time.](./Figures/F02-3D-MS1-scans-400-1200-lattice.png)
+]
+
+.right-col-50[
+![MS2 spectra interleaved between two MS1 spectra.](./Figures/F02-3D-MS1-MS2-scans-100-1200-lattice.png)
+]
+
+???
+
+- Please keep this MS space and the semi-stochastic nature of MS
+  acquisition in mind , as I will come back to it later.
+
+
+---
+###  Identification: fragment ions
+
+![Peptide fragment ions.](./Figures/frag.png)
+
+
+---
+###  Identification: Peptide-spectrum matching (PSM)
+
+Matching **expected** and *observed* spectra:
+
+```
+> MSnbase::calculateFragments("SIGFEGDSIGR")
+           mz  ion type pos z        seq
+1    88.03931   b1    b   1 1          S
+2   201.12337   b2    b   2 1         SI
+3   258.14483   b3    b   3 1        SIG
+4   405.21324   b4    b   4 1       SIGF
+5   534.25583   b5    b   5 1      SIGFE
+6   591.27729   b6    b   6 1     SIGFEG
+7   706.30423   b7    b   7 1    SIGFEGD
+8   793.33626   b8    b   8 1   SIGFEGDS
+9   906.42032   b9    b   9 1  SIGFEGDSI
+10  963.44178  b10    b  10 1 SIGFEGDSIG
+11  175.11895   y1    y   1 1          R
+12  232.14041   y2    y   2 1         GR
+13  345.22447   y3    y   3 1        IGR
+14  432.25650   y4    y   4 1       SIGR
+15  547.28344   y5    y   5 1      DSIGR
+16  604.30490   y6    y   6 1     GDSIGR
+ [ reached getOption("max.print") -- omitted 16 rows ]
+```
+
+---
+class: middle
+
+###  Identification: Peptide-spectrum matching (PSM)
+
+Matching *expected* and **observed** spectra:
+
+![Peptide fragment matching](./Figures/annotated-spectrum.png)
+
+
+---
+### Identification: database
+
+![Uniprot human proteome](./Figures/uniprot1.png)
+
+???
+
+## [Human proteome](https://www.uniprot.org/help/human_proteome)
+
+In 2008, a draft of the complete human proteome was released from
+UniProtKB/Swiss-Prot: the approximately 20,000 putative human
+protein-coding genes were represented by one UniProtKB/Swiss-Prot
+entry, tagged with the keyword 'Complete proteome' and later linked to
+proteome identifier UP000005640. This UniProtKB/Swiss-Prot H. sapiens
+proteome (manually reviewed) can be considered as complete in the
+sense that it contains one representative (**canonical**) sequence for
+each currently known human gene. Close to 40% of these 20,000 entries
+contain manually annotated alternative isoforms representing over
+22,000 additional sequences
+
+
+## [What is the canonical sequence?](https://www.uniprot.org/help/canonical_and_isoforms)
+
+To reduce redundancy, the UniProtKB/Swiss-Prot policy is to describe
+all the protein products encoded by one gene in a given species in a
+single entry. We choose for each entry a canonical sequence based on
+at least one of the following criteria:
+
+1. It is the most prevalent.
+2. It is the most similar to orthologous sequences found in other species.
+3. By virtue of its length or amino acid composition, it allows the
+   clearest description of domains, isoforms, polymorphisms,
+   post-translational modifications, etc.
+4. In the absence of any information, we choose the longest sequence.
+
+
+## Are all isoforms described in one UniProtKB/Swiss-Prot entry?
+
+Whenever possible, all the protein products encoded by one gene in a
+given species are described in a single UniProtKB/Swiss-Prot entry,
+including isoforms generated by alternative splicing, alternative
+promoter usage, and alternative translation initiation (*). However,
+some alternative splicing isoforms derived from the same gene share
+only a few exons, if any at all, the same for some 'trans-splicing'
+events. In these cases, the divergence is obviously too important to
+merge all protein sequences into a single entry and the isoforms have
+to be described in separate 'external' entries.
+
+## UniProt [downloads](https://www.uniprot.org/downloads)
+
+---
+class: middle
+
+### Identification
+
+![Decoy databases and peptide scoring](./Figures/pr-2007-00739d_0004.gif)
+
+From Käll *et al.* [Posterior Error Probabilities and False Discovery
+Rates: Two Sides of the Same Coin](https://pubs.acs.org/doi/abs/10.1021/pr700739d).
+
+???
+
+
+- FDR = B/(A+B)
+- PEP = b/(a+b)
+
+
+---
+###  Identification: Protein inference
+
+- Keep only reliable peptides
+- From these peptides, infer proteins
+- If proteins can't be resolved due to shared peptides, merge them
+  into **protein groups** of indistinguishable or non-differentiable
+  proteins.
+
+
+
+---
+class: middle center
+
+![Peptide evidence classes](./Figures/nbt0710-647-F2.gif)
+
+From [Qeli and Ahrens
+(2010)](http://www.ncbi.nlm.nih.gov/pubmed/20622826).  See also
+[Nesvizhskii and Aebersold
+(2005)](http://www.ncbi.nlm.nih.gov/pubmed/16009968).
+
+---
+### Quantitation
+
+
+|    |Label-free |Labelled   |
+|:---|:----------|:----------|
+|MS1 |XIC        |SILAC, 15N |
+|MS2 |Counting   |iTRAQ, TMT |
+
+
+
+Summarising spectrum/peptide intensities into the protein (group)
+level quantities.
+
+---
+class: middle center
+
+![](./Figures/itraq.png)
+
+---
+class: middle center
+
+![](./Figures/serine-plot-1.png)
+
+---
+class: middle center
+
+![](./Figures/Silac.gif)
+
+Credit: Wikimedia Commons.
+
+---
+class: middle
+### Dealing with missing values
+
+Really missing, of not detected (semi-stochastic nature of precursor
+selection in shotgun proteomics)?
+
+- Identifiction transfer/matching between runs.
+- Filtering.
+- Imputation.
+
+
+---
+class: middle
+
+
+.left-col-50[
+![Retention time alignment](./Figures/pr-2012-00776t_0004.jpeg)
+]
+
+.right-col-50[
+![Matching between runs](./Figures/idtrans.png)
+]
+
+.left-col-100[
+From Bond *et al.* [Improving Qualitative and Quantitative Performance
+for MSE-based Label-free
+Proteomics](https://pubs.acs.org/doi/10.1021/pr300776t).
+]
+
+
+---
+### Missing values
+
+- Filtering.
+- Imputation: considering the underlying nature of missingness, i.e
+  missing not at random (left-censored) or at random.
+
+![Root-mean-square error (RMSE) observations standard deviation ratio (RSR), KNN and MinDet imputation. Lower (blue) is better.](./Figures/imp-sim.png)
+
+Lazar *et al.* [Accounting for the Multiple Natures of Missing Values
+in Label-Free Quantitative Proteomics Data Sets to Compare Imputation
+Strategies](http://dx.doi.org/10.1021/acs.jproteome.5b00981).
+
+
+???
+
+Root-mean-square error (RMSE) observations standard deviation ratio
+(RSR), KNN and MinDet imputation. Lower (blue) is better.
+
+
+---
+class: middle
+
+### Recap
+
+![](./Figures/overview2.jpg)
+
+???
+
+What we have seen so far.
+
+---
+class: middle
+### Challenges
+
+![](./Figures/only_prep.jpg)
+
+???
+
+Turning the many buttons independently.
+
+---
+class: middle
+### Challenges
+
+![](./Figures/only_id.jpg)
+
+???
+
+Turning the many buttons independently.
+
+---
+class: middle
+### Challenges
+
+![](./Figures/only_data.jpg)
+
+???
+
+Turning the many buttons independently.
+
+---
+class: middle
+### Challenges
+
+![](./Figures/linked.jpg)
+
+???
+
+- These different parts aren't independent
+- Linking results to raw and identification data.
+
+---
+class: middle
+
+### Other technologies: DIA
+
+Data Independent Acquisition (DIA) (as opposed to Data Dependent
+Acquisition - DDA).
+
+Examples:
+
+- **MS$^{E}$**, where the whole M/Z range is fragmented (at different
+  energies) and precursors and fragment ions are matched using their
+  elution patterns, by Waters.
+- **SWATH-MS** (Sequential Windowed Acquisition of All Theoretical
+  Fragment Ion Mass Spectra) by AB Sciex
+- **AIF** (All-ion fragmentation, similar to MS$^E$) by Thermo Fisher.
+- ...
+
+The advantage of these is that all data are recorded and has thus the
+potential to collect and analyse all the data, this limiting the
+number of missing values.
+
+See Law and Lim [Recent advances in mass spectrometry: data
+independent analysis and hyper reaction
+monitoring](https://www.tandfonline.com/doi/full/10.1586/14789450.2013.858022).
+
+---
+class: middle
+
+### Other technologies: single cell proteomics using CyTOF
+
+In **mass cytometry**, rare earth metals are used as reporters on
+antibodies. Analysis of metal abundances using the mass cytometer
+allows determination of the expression of 100s of markers in 1000s
+individual cells.
+
+See Giesen *et al.* [Highly multiplexed imaging of tumor tissues with
+subcellular resolution by mass
+cytometry](https://www.nature.com/articles/nmeth.2869) and Bendall *et
+al.* [Single-Cell Mass Cytometry of Differential Immune and Drug
+Responses Across a Human Hematopoietic
+Continuum](http://science.sciencemag.org/content/332/6030/687.full).
+
+
+---
+class: middle
+
+### Other technologies: single cell proteomics using MS
+
+Single Cell ProtEomics by Mass Spectrometry (SCoPE-MS) can quantify
+thousands of proteins in single mammalian cells.
+
+![Single Cell ProtEomics by Mass Spectrometry (SCoPE-MS)](./Figures/scope-ms.png)
+
+
+
+Budnik *et al.* [Mass-spectrometry of single mammalian cells
+quantifies proteome heterogeneity during cell
+differentiation](https://www.biorxiv.org/content/early/2018/01/01/102681).
+
+???
+
+A major issue in MS-based proteomics is dynamic range (up to 10$^9$),
+and proteins of very low abundance are always hard to
+quantify. (Reminder: there is no PCR equivalent for oligopeptides)
+
+The difficulty to measure low abundance proteins becomes even more
+accute when low amounts of biological material are used, in particular
+single cells.
+
+---
+class: middle
+
+### Additional dimensions
+
+- Post-translational modifications (PTMs)
+- Protein-protein interactions (PPI)
+- Protein sub-cellular localisation (spatial proteomics)
+
+???
+
+- There are additional dimensions to the study of proteins, such as
+  ....
+- When based on MS, all points discussed above will be relevant too.
+
+---
+class: middle
+name: laurent-gatto
+
+.left-col-50[
+<img src="./img/lgatto3b.png" width = "180px"/>
+### Laurent Gatto
+<i class="fas fa-flask"></i>&nbsp;[Computational Proteomics Unit](https://lgatto.github.io/cpu-lab/)<br />
+<i class="fas fa-map-marker-alt"></i>&nbsp;University of Cambridge<br />
+<i class="fas fa-envelope"></i>&nbsp;lg390@cam.ac.uk<br />
+<i class="fas fa-home"></i>&nbsp;https://lgatto.github.io<br />
+<i class="fab fa-twitter"></i>&nbsp;[@lgatto](https://twitter.com/lgatt0/)<br />
+<i class="fab fa-github"></i>&nbsp;[lgatto](https://github.com/lgatto/)<br />
+<img width="20px" align="top" alt="orcid" src="./img/orcid_64x64.png" />&nbsp;[0000-0002-1520-2268](https://orcid.org/0000-0002-1520-2268)<br />
+<img width="20px" align="top" alt="Impact story" src="./img/keybase.png"/>&nbsp;[lgatto](https://keybase.io/lgatto)<br />
+<img width="20px" align="top" alt="Google scholar" src="./img/gscholar.png"/>&nbsp;[Google scholar](https://scholar.google.co.uk/citations?user=k5DrB74AAAAJ&hl=en)<br />
+<img width="20px" align="top" alt="Impact story" src="./img/impactstory-logo.png"/>&nbsp;[Impact story](https://profiles.impactstory.org/u/0000-0002-1520-2268)<br />
+<i class="fas fa-pencil-alt"></i>&nbsp;[dissem.in](https://dissem.in/r/6231/laurent-gatto)<br />
+<!-- <i class="fab fa-linkedin"></i>&nbsp;https://www.linkedin.com/in/lgatto/<br /> -->
+]
+
+.rigth-col-50[
+
+**Acknowledgements**: [BBSRC](http://www.bbsrc.ac.uk/) and the
+[Wellcome Trust](https://wellcome.ac.uk/) (via Kathryn Lilley) and and
+collaborators/contributors [Lisa
+Breckels](https://github.com/lmsimp/), [Sebastian
+Gibb](https://sgibb.github.io/) and [Johannes
+Rainer](https://github.com/jotsetung/).
+
+## Thank you for your attention
+
+### Find the slides at [http://bit.ly/20180607bsu](http://bit.ly/20180607bsu)
+]
