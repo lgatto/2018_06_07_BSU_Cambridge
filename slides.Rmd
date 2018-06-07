@@ -44,7 +44,13 @@ class: middle center
 
 ???
 
-Take-home message: *In what ways to these summaries differ?*
+**In what ways to these summaries differ?**
+
+From a 2011 study that compared the expression profiles of 3 cell
+lines using RNA-Seq, MS-based proteomics and immunofluorescence
+(protein-specific antibodies).
+
+They observed an overall Spearman correlation of 0.63.
 
 Using a common gene-centric identifier, but
 
@@ -52,6 +58,9 @@ Using a common gene-centric identifier, but
   on the left. Protein groups on the right.
 - How are these intensities produced?
 
+## Take-home message 1
+
+These data tables are more different than they appear.
 
 ---
 class: middle
@@ -70,8 +79,8 @@ class: middle
 ### How does MS work?
 
 1. Digestion of proteins into peptides - as will become clear later,
-   the features we measure in 'proteomics' are peptides, **not**
-   proteins.
+   the features we measure in shotgun (or bottom-up) *proteomics* are
+   peptides, **not** proteins.
 
 --
 
@@ -104,8 +113,8 @@ class: middle
 An mass spectrometer is composed of three components:
 
 1. The *source*, that ionises the molecules: examples are Matrix-assisted
-   laser desorption/ionisation (MALDI) or electrospray ionisation.
-   (ESI)
+   laser desorption/ionisation (MALDI) or electrospray ionisation
+   (ESI).
 2. The *analyser*, that separates the ions: Time of flight (TOF) or Orbitrap.
 3. The *detector* that quantifies the ions.
 
@@ -127,8 +136,8 @@ Before MS:
 An mass spectrometer is composed of three components:
 
 1. The *source*, that ionises the molecules: examples are Matrix-assisted
-   laser desorption/ionisation (MALDI) or electrospray ionisation.
-   (ESI)
+   laser desorption/ionisation (MALDI) or electrospray ionisation
+   (ESI).
 2. The *analyser*, that separates the ions: Time of flight (TOF) or Orbitrap.
 3. The *detector* that quantifies the ions.
 
@@ -212,6 +221,10 @@ Matching *expected* and **observed** spectra:
 ![Peptide fragment matching](./Figures/annotated-spectrum.png)
 
 
+???
+
+Performed by **search engines** such as Mascot, MSGF+, Andromeda, ...
+
 ---
 ### Identification: database
 
@@ -289,16 +302,33 @@ Rates: Two Sides of the Same Coin](https://pubs.acs.org/doi/abs/10.1021/pr700739
   proteins.
 
 
-
 ---
-class: middle center
+class: middle
 
 ![Peptide evidence classes](./Figures/nbt0710-647-F2.gif)
 
 From [Qeli and Ahrens
-(2010)](http://www.ncbi.nlm.nih.gov/pubmed/20622826).  See also
-[Nesvizhskii and Aebersold
+(2010)](http://www.ncbi.nlm.nih.gov/pubmed/20622826).
+
+
+---
+class: middle
+
+![Peptide evidence classes](./Figures/F5_large.jpg)
+
+From [Nesvizhskii and Aebersold
 (2005)](http://www.ncbi.nlm.nih.gov/pubmed/16009968).
+
+???
+
+Basic peptide grouping scenarios.
+- a. distinct protein identifications.
+- b. differentiable protein identifications.
+- c. indistinguishable protein identifications.
+- d. subset protein identification.
+- e. subsumable protein identification.
+- f. an example of a protein group where one protein can explain all
+  observed peptides, but its identification is not conclusive.
 
 ---
 ### Quantitation
@@ -335,7 +365,7 @@ Credit: Wikimedia Commons.
 class: middle
 ### Dealing with missing values
 
-Really missing, of not detected (semi-stochastic nature of precursor
+Really missing, or not detected (semi-stochastic nature of precursor
 selection in shotgun proteomics)?
 
 - Identifiction transfer/matching between runs.
@@ -434,6 +464,11 @@ class: middle
 - These different parts aren't independent
 - Linking results to raw and identification data.
 
+## Take-home message 2:
+
+How could we control the whole process, and directly account for the
+dependency of these different parts of a typical proteomcis pipeline?
+
 ---
 class: middle
 
@@ -452,8 +487,8 @@ Examples:
 - AIF (All-ion fragmentation, similar to $MS^E$) by Thermo Fisher.
 - ...
 
-The advantage of these is that all data are recorded and has thus the
-potential to collect and analyse all the data, this limiting the
+The advantage of these DIA methods is that all the data are recorded;
+they have the potential to analyse all the data, thus limiting the
 number of missing values.
 
 See Law and Lim [Recent advances in mass spectrometry: data
@@ -496,7 +531,7 @@ differentiation](https://www.biorxiv.org/content/early/2018/01/01/102681).
 
 ???
 
-A major issue in MS-based proteomics is dynamic range (up to 10$^9$),
+A major issue in MS-based proteomics is dynamic range (up to $10^9$),
 and proteins of very low abundance are always hard to
 quantify. (Reminder: there is no PCR equivalent for oligopeptides)
 
