@@ -515,6 +515,12 @@ class: middle
 How could we control the whole process, and directly account for the
 dependency of these different parts of a typical proteomcis pipeline?
 
+Next week's talk by Andrew Dowsey [*Biomarker discovery through
+statistical signal processing and Bayesian modelling on large-scale
+quantitative proteomics
+data*](https://www.mrc-bsu.cam.ac.uk/event/bsu-seminar-biomarker-discovery-statistical-signal-processing-bayesian-modelling-large-scale-quantitative-proteomics-data/)
+could be very interesting in that respect.
+
 ---
 class: middle
 
@@ -648,7 +654,7 @@ name: laurent-gatto
 .rigth-col-50[
 
 **Acknowledgements**: [BBSRC](http://www.bbsrc.ac.uk/) and the
-[Wellcome Trust](https://wellcome.ac.uk/) (via Kathryn Lilley) and
+[Wellcome Trust](https://wellcome.ac.uk/) and
 collaborators/contributors [Lisa
 Breckels](https://github.com/lmsimp/), [Olly
 Crook](https://olivercrook.co.uk/), [Sebastian
