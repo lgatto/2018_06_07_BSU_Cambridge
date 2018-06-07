@@ -556,11 +556,12 @@ monitoring](https://www.tandfonline.com/doi/full/10.1586/14789450.2013.858022).
 ---
 class: middle
 
-### Other technologies: targetted proteomics
+### Other technologies: targeted proteomics
 
-Selected reaction monitoring (SRMs) are pre-defined MS features that
-the instrument will specifically scan for. This is the method to assay
-a limited number of peptides/proteins in a high number of samples.
+Selected/multiple/parallel reaction monitoring (SRMs, MRM, PRM) are
+pre-defined MS features that the instrument will specifically scan
+for. This is the method to assay a limited number of peptides/proteins
+in a high number of samples.
 
 ---
 class: middle
@@ -615,6 +616,8 @@ class: middle
 - Protein-protein interactions (PPI)
 - Protein sub-cellular localisation (spatial proteomics)
 
+When based on MS, all points discussed above will remain relevant.
+
 ???
 
 - There are additional dimensions to the study of proteins, such as
@@ -645,9 +648,10 @@ name: laurent-gatto
 .rigth-col-50[
 
 **Acknowledgements**: [BBSRC](http://www.bbsrc.ac.uk/) and the
-[Wellcome Trust](https://wellcome.ac.uk/) (via Kathryn Lilley) and and
+[Wellcome Trust](https://wellcome.ac.uk/) (via Kathryn Lilley) and
 collaborators/contributors [Lisa
-Breckels](https://github.com/lmsimp/), [Sebastian
+Breckels](https://github.com/lmsimp/), [Olly
+Crook](https://olivercrook.co.uk/), [Sebastian
 Gibb](https://sgibb.github.io/) and [Johannes
 Rainer](https://github.com/jotsetung/).
 
