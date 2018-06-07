@@ -37,6 +37,14 @@ process. I will then present some recent applications of mass
 spectrometry-based proteomics and conclude with challenges and
 opportunities.
 
+???
+
+This is probably a different type of seminar than those that are
+generally presented here. I won't focus on any MS/proteomics-specific
+statistics (because I don't think that the field is particularly
+strong on that front anyway), but want to describe the technology and
+how it impacts the data and their analysis.
+
 ---
 class: middle center
 
@@ -44,13 +52,13 @@ class: middle center
 
 ???
 
-**In what ways to these summaries differ?**
-
 From a 2011 study that compared the expression profiles of 3 cell
 lines using RNA-Seq, MS-based proteomics and immunofluorescence
 (protein-specific antibodies).
 
 They observed an overall Spearman correlation of 0.63.
+
+**In what ways to these summaries differ?**
 
 Using a common gene-centric identifier, but
 
@@ -60,7 +68,7 @@ Using a common gene-centric identifier, but
 
 ## Take-home message 1
 
-These data tables are more different than they appear.
+These data tables are less similar than they appear.
 
 ---
 class: middle
@@ -377,6 +385,13 @@ class: middle
 - Summarising spectrum/peptide intensities into the protein (group)
   level quantities.
 
+???
+
+- Isobaric tagging (TMT, iTRAQ) are combined at the peptide level,
+  i.e. after labelling.
+
+- Metabolic labelling (SILAC, 15N, 18O) are combined at the protein
+  level, thus sharing some additional technical variability.
 
 ---
 class: middle
@@ -481,12 +496,16 @@ class: middle
 - These different parts aren't independent
 - Linking results to raw and identification data.
 
-## Example
+## Examples
 
-Is it better to quantify everything and search for differentially
-expressed features (even if not identified) and pay a heavy code for
-my p-value adjustment, or am I better off applying a stringent filter
-at the identification level to limit the number of tests?
+- Is it better to quantify everything and search for differentially
+  expressed features (even if not identified) and pay a heavy code for
+  my p-value adjustment, or am I better off applying a stringent
+  filter at the identification level to limit the number of tests?
+
+- Wouldn't it be better to focus on peptide-level data analysis and
+  avoid the protein inference problem, rather than work with
+  protein-level summaries?
 
 ## Take-home message 2:
 
@@ -505,7 +524,7 @@ Examples:
 
 - $MS^{E}$, where the whole M/Z range is fragmented (at different
   energies) and precursors and fragment ions are matched using their
-  elution patterns, by Waters.
+  elution profiles, by Waters.
 - SWATH-MS (Sequential Windowed Acquisition of All Theoretical
   Fragment Ion Mass Spectra) by AB Sciex
 - AIF (All-ion fragmentation, similar to $MS^E$) by Thermo Fisher.
@@ -518,6 +537,27 @@ number of missing values.
 See Law and Lim [Recent advances in mass spectrometry: data
 independent analysis and hyper reaction
 monitoring](https://www.tandfonline.com/doi/full/10.1586/14789450.2013.858022).
+
+???
+
+- DIA methods are maturing, but arguably not as widely applied as
+  DDA. They also require specific software (commercial solution, PLGS
+  for MSe) that is arguably not the very best one can hope for.
+
+- SWATH-MS acquisition uses pre-defined real spectra libraries
+  libraries and also requires dedicated software (OpenSWATH, a open
+  and good software). SWATH-MS is also considered having high
+  throughout as well as reproducibility and consistency (in the hands
+  of experts).
+
+---
+class: middle
+
+### Other technologies: targetted proteomics
+
+Selected reaction monitoring (SRMs) are pre-defined MS features that
+the instrument will specifically scan for. This is the method to assay
+a limited number of peptides/proteins in a high number of samples.
 
 ---
 class: middle
