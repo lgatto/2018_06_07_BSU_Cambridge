@@ -380,7 +380,10 @@ class: middle
 - Labelled methods allow to pool samples before MS acquisition (up to
   10 samples for Tandem Mass Tags (TMT)), rather than running
   individual MS runs for each samples, and thus sharing technical
-  variability and reducing missing data (see below).
+  variability and reducing missing data (see for example Russel and
+  Lilley [Pipeline to assess the greatest source of technical variance
+  in quantitative proteomics using metabolic
+  labelling](https://www.sciencedirect.com/science/article/pii/S1874391912006641)).
 
 - Summarising spectrum/peptide intensities into the protein (group)
   level quantities.
