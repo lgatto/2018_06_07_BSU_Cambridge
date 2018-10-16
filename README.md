@@ -18,4 +18,4 @@ spectrometry-based proteomics and conclude with challenges and
 opportunities.
 
 
-- [Slides](./slides.html)
+- [Slides](https://lgatto.github.io/2018_06_07_BSU_Cambridge/slides.html#1)
